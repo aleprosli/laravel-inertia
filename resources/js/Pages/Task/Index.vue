@@ -3,7 +3,10 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { useForm, Head } from '@inertiajs/vue3';
- 
+import Task from '@/Components/Task.vue';
+
+defineProps(['tasks']);
+
 const form = useForm({
     name: '',
 });
@@ -23,6 +26,14 @@ const form = useForm({
                 <InputError :message="form.errors.message" class="mt-2" />
                 <PrimaryButton class="mt-4">Task</PrimaryButton>
             </form>
+
+            <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
+                <Task
+                    v-for="task in tasks"
+                    :key="task.id"
+                    :task="task"
+                />
+            </div>
         </div>
     </AuthenticatedLayout>
 </template>
